@@ -1,5 +1,6 @@
 # ShakespeareanPokemon
-It is an 
+It is an search engine, that given a Pokemon name, returns its Shakespearean description.
+
 
 ## Table of contents
 * [General info](#general-info)
@@ -8,7 +9,8 @@ It is an
 * [Structure](#structure)
 
 ## General info
-The project is single page application that 
+The project is single page application that gives the ability to search by pokemon name and to retrieve it's Shakespearean description..
+If the Shakespearean translation is not returned by the engine the application is showing the original Pokemon description to the user.
 	
 ## Technologies
 Project is created with:
