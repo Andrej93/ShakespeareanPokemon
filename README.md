@@ -29,7 +29,7 @@ To run this project, you need to install and run both parts separately
     $ npm install
     $ npm start
     
-    - the application is configured to run on http://locahost:3000
+   the application is configured to run on http://locahost:3000
     
 2. Back-end (.Net Core console application):
   -build the ShakespeareanPokemon.WebApi project
