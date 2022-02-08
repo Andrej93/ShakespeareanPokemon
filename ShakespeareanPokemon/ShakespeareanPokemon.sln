@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShakespeareanPokemon.WebApi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShakespeareanPokemon.Entities", "ShakespeareanPokemon.Entities\ShakespeareanPokemon.Entities.csproj", "{62406709-6FA2-45BB-8B7D-1B593372505B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShakespeareanPokemon.Test", "ShakespeareanPokemon.Test\ShakespeareanPokemon.Test.csproj", "{EF626394-CDF6-46BA-99BD-39BEAB7A9C00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{62406709-6FA2-45BB-8B7D-1B593372505B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62406709-6FA2-45BB-8B7D-1B593372505B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62406709-6FA2-45BB-8B7D-1B593372505B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF626394-CDF6-46BA-99BD-39BEAB7A9C00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF626394-CDF6-46BA-99BD-39BEAB7A9C00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF626394-CDF6-46BA-99BD-39BEAB7A9C00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF626394-CDF6-46BA-99BD-39BEAB7A9C00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

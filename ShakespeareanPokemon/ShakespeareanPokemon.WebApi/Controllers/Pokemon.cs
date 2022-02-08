@@ -18,69 +18,76 @@ namespace ShakespeareanPokemon.WebApi.Controllers
         }
 
         [HttpGet("Pokemon")]
-        public async Task<Pokemon> Pokemon(string name)
+        public async Task<Pokemon> Pokemon(string? name)
         {
-
-            var reply = new Pokemon()
+            if (!string.IsNullOrEmpty(name))
             {
-                name = name
-            };
+                var reply = new Pokemon()
+                {
+                    name = name
+                };
 
-            using (var client = new HttpClient())
-            {
-                var pokemonUrl = _configuration.GetSection("PokeApi").GetSection("Url").Value + name;
-
-                HttpResponseMessage res = await client.GetAsync(pokemonUrl);
-
-                res.EnsureSuccessStatusCode();
-
-                var contents = await res.Content.ReadAsStringAsync();
-
-                var pokemon = JsonConvert.DeserializeObject<PokemonSpecies>(contents);
-
-                reply.description = pokemon.flavorTextEntries.FirstOrDefault().flavorText;
-            }
-
-
-            if (!string.IsNullOrEmpty(reply.description))
-            {
                 using (var client = new HttpClient())
                 {
-                    reply.description = reply.description.Replace("\n", " ");
-                    var shakespeareTranslationApiUrl = _configuration.GetSection("ShakespeareTranslationApi").GetSection("Url").Value + reply.description;
+                    var pokemonUrl = _configuration.GetSection("PokeApi").GetSection("Url").Value + name;
+
+                    HttpResponseMessage res = await client.GetAsync(pokemonUrl);
+
+                    res.EnsureSuccessStatusCode();
+
+                    var contents = await res.Content.ReadAsStringAsync();
+
+                    var pokemon = JsonConvert.DeserializeObject<PokemonSpecies>(contents);
+
+                    reply.description = pokemon.flavorTextEntries.FirstOrDefault().flavorText;
+                }
 
 
-                    HttpResponseMessage res = await client.GetAsync(shakespeareTranslationApiUrl);
-
-                    if (res.StatusCode == System.Net.HttpStatusCode.OK)
+                if (!string.IsNullOrEmpty(reply.description))
+                {
+                    using (var client = new HttpClient())
                     {
-                        var contents = await res.Content.ReadAsStringAsync();
+                        reply.description = reply.description.Replace("\n", " ");
+                        var shakespeareTranslationApiUrl = _configuration.GetSection("ShakespeareTranslationApi").GetSection("Url").Value + reply.description;
 
-                        var shakespeareTranslation = JsonConvert.DeserializeObject<ShakespeareTranslation>(contents.ToString());
 
-                        if (!string.IsNullOrEmpty(shakespeareTranslation.contents.translated))
+                        HttpResponseMessage res = await client.GetAsync(shakespeareTranslationApiUrl);
+
+                        if (res.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            reply.description = shakespeareTranslation.contents.translated;
-                            return reply;
+                            var contents = await res.Content.ReadAsStringAsync();
+
+                            var shakespeareTranslation = JsonConvert.DeserializeObject<ShakespeareTranslation>(contents.ToString());
+
+                            if (!string.IsNullOrEmpty(shakespeareTranslation.contents.translated))
+                            {
+                                reply.description = shakespeareTranslation.contents.translated;
+                                return reply;
+                            }
+                            else
+                            {
+                                return reply;
+                            }
                         }
                         else
                         {
                             return reply;
                         }
                     }
-                    else
-                    {
-                        return reply;
-                    }
+
                 }
+                else
+                {
+                    return reply;
+                }
+
 
             }
             else
             {
-                return reply;
+                return new Pokemon();
             }
-
-
+            
 
         }
     }
